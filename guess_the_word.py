@@ -1,3 +1,7 @@
+# Dale Rubenstein
+# CIS256 Fall 2026
+# Programming Assignment 4.guess_the_word
+
 import random
 
 """
@@ -12,13 +16,11 @@ def show_secret(secret_word, guessed_letters):
         if letter in guessed_letters:
             print(f"{letter}", end = '')
         else:  
-            print(" _ ", end='')
-            
+            print(" _ ", end='')         
     print("\n")
 
 
 def user_guess(guess, secret_word):
-    
     if len(guess) > 1 or not guess.isalpha():
         raise ValueError("Single letters only please.") 
     else:
@@ -27,47 +29,61 @@ def user_guess(guess, secret_word):
         else:
             return False
 
+
 def get_the_letters(word):
-    return "".join(set(word))
+    current_word = "".join(set(word))
+    return current_word    
+
 
 words = ['DRACULA', 'VANHELSING', 'MINA', 'RENFIELD', 'HARKER', 'LUCY']
 
-attempts = 6
-guessed_letters = ''
+attempts = 3
+good_guesses = ''
+bad_guesses = ''
 
 print("Guess the word. Hint: Names from a Bram Stoker story.")
 
 secret_word = chosen_word(words)
-print(" _ " * len(secret_word))
+hidden_word = (" _ " * len(secret_word))
+print(hidden_word)
 
-while attempts > 0 and len(guessed_letters) < len(get_the_letters(secret_word)):
 
+while attempts > 0 and len(good_guesses) < len(get_the_letters(secret_word)):
+
+    print(get_the_letters(secret_word))
     guess = input("Guess a letter: ").upper()
 
     try:
         guess_in_word = user_guess(guess, secret_word)
 
         if guess in secret_word:
-                print(f"Ohhh, {guess} is part of the secret word.", end =' ')
-        else:
-            if guess in guessed_letters:
-                print(f"You already tried the letter {guess}.")
+            if guess in good_guesses:
+                print(f"You already tried the letter {guess}.", end = ' ')
             else:
-                print(f"Sorry, {guess} is not a part of the word.")
-            attempts -= 1
+                print(f"Ohhh, {guess} is part of the secret word.", end =' ')
+                good_guesses += guess
 
-        guessed_letters += guess
-        print(f"{attempts} attempts remain. Choose wisely.")
-        show_secret(secret_word, guessed_letters)
-        #print(secret_word)
+        elif guess not in secret_word:
+            if guess in bad_guesses:
+                print(f"You already tried the letter {guess}.")
+
+            else:
+                print(f"Sorry, {guess} is not a part of the word.", end = ' ')
+                attempts -= 1
+                bad_guesses += guess
         
-        #print(f"Correct letters guessed so far: {guessed_letters}")
+        print(f"{attempts} attempts remain. Choose wisely.\n")
+        show_secret(secret_word, good_guesses)
 
 
     except ValueError as e:
         print(e)
 
-if len(guessed_letters) == len(get_the_letters(secret_word)):
+    #print(f"Num of good: {len(good_guesses)}")
+    #print(f"Num of letters in word: {len(get_the_letters(secret_word))}")
+
+
+if len(good_guesses) == len(get_the_letters(secret_word)):
     print("You have won.....this time.")
 
 else:
