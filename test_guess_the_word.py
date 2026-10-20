@@ -6,10 +6,19 @@
 Test program to test the guess_the_word program.  It took a while to set
 up the envrionment properly along with using git. Found good reference
 material for pytest at: https://docs.pytest.org/en/6.2.x/capture.html.
+
+Note: pytest -vv provides more feedback, specifies which tests pass or fail
 """
 
-from guess_the_word import show_secret, user_guess, get_the_letters
+from guess_the_word import show_secret, user_guess, get_the_letters, chosen_word, words
 import pytest
+
+
+#Testing to see if the random word is in words, should pass
+def test_chosen_word():
+    result = chosen_word(words)
+    assert result in words
+
 
 """
 using 'capsys', a built in pytest fixture that captures what the
