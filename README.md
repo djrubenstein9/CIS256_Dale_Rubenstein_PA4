@@ -1,3 +1,3 @@
 # CIS256_Dale_Rubenstein_PA4
 
-This is my first attempt at using git hub.  It's actually pretty neat.
+This is my first attempt at using git hub.  It's actually pretty neat.  The file guess_the_word.py is just a game of hangman.  Explanations for each section of code is provided as comments within the program.  The test_guess_the_word.py file was a handful of tests that I came up with to test the functions within the guess_the_word file.  Some of the tests were designed to fail on purpose.  There were a few things I wanted to ensure would fail.  So far, my focus has been to make sure the code just works. Since I have picked up the handy skill of testing code, I want to explore it more to see what other kinds of tests can be devised. I found a great resource in https://docs.pytest.org/en/6.2.x/reference.html#class for pytest.
